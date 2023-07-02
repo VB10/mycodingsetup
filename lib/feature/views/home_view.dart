@@ -1,9 +1,10 @@
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/firestore.dart';
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/view_model/home_view_model.dart';
 import 'package:mycodingsetup/feature/views/home_detail_view.dart';
+import 'package:mycodingsetup/feature/views/home_form_view.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 import 'package:mycodingsetup/product/utility/image_constants.dart';
 import 'package:mycodingsetup/product/utility/locale_keys.dart';
@@ -26,9 +27,23 @@ class _HomeViewState extends State<HomeView> {
           style: context.general.textTheme.titleMedium,
         ),
         actions: [
-          CircleAvatar(
-            backgroundColor: context.general.colorScheme.secondary,
-            child: Image.asset(ImageConstants.icGithub),
+          InkWell(
+            onTap: () async {
+              final isAuthenticated =
+                  await _homeViewModel.checkUserGithubLogin();
+              if (!mounted) return;
+              if (!isAuthenticated) return;
+              if (_homeViewModel.user == null) return;
+              await context.route.navigateToPage(
+                HomeFormView(
+                  user: _homeViewModel.user!,
+                ),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: context.general.colorScheme.secondary,
+              child: Image.asset(ImageConstants.icGithub),
+            ),
           )
         ],
       ),

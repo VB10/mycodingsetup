@@ -12,6 +12,7 @@ final class User with EquatableMixin {
     this.name,
     this.photo,
     this.shortBio,
+    this.userName,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -19,23 +20,26 @@ final class User with EquatableMixin {
   final String? name;
   final String? photo;
   final String? shortBio;
+  final String? userName;
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   @override
-  List<Object?> get props => [githubUrl, name, photo, shortBio];
+  List<Object?> get props => [githubUrl, name, photo, shortBio, userName];
 
   User copyWith({
     String? githubUrl,
     String? name,
     String? photo,
     String? shortBio,
+    String? userName,
   }) {
     return User(
       githubUrl: githubUrl ?? this.githubUrl,
       name: name ?? this.name,
       photo: photo ?? this.photo,
       shortBio: shortBio ?? this.shortBio,
+      userName: userName ?? this.userName,
     );
   }
 }
