@@ -25,6 +25,7 @@ dependencies:
   cloud_firestore: ^4.8.2
   firebase_core: ^2.14.0
   flutterfire_ui: ^0.4.3+20
+  flutter_gen: ^5.3.1
 
 dev_dependencies:
   flutter_test:
@@ -33,9 +34,15 @@ dev_dependencies:
   very_good_analysis: ^5.0.0+1
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  flutter_gen_runner: ^5.3.1
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/
+
+flutter_gen:
+  output: lib/product/generation/
+  assets:
+    enabled: true
