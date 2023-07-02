@@ -25,6 +25,7 @@ dependencies:
   cloud_firestore: ^4.8.2
   firebase_core: ^2.14.0
   flutterfire_ui: ^0.4.3+20
+  easy_localization: ^3.0.2
 
 dev_dependencies:
   flutter_test:
