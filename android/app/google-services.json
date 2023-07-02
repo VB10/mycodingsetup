@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "323397325713",
+    "project_id": "coding-setup",
+    "storage_bucket": "coding-setup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323397325713:android:debc6c67923054d80b8030",
+        "android_client_info": {
+          "package_name": "com.vb10.mycodingsetup.mycodingsetup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323397325713-mmdm0uttuh34lmt9sfu6q4qgpjo725k9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyuVYAEaOgYekhbyCarWQJcILsuNWsmZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323397325713-mmdm0uttuh34lmt9sfu6q4qgpjo725k9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

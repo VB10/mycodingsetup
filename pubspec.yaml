@@ -1,0 +1,41 @@
+name: mycodingsetup
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.5 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  kartal: ^3.0.1
+
+  # Core
+  json_annotation: ^4.8.1
+  equatable: ^2.0.5
+
+  #UI
+  flutter_json_view: ^1.1.0
+
+  #Firebase
+  cloud_firestore: ^4.8.2
+  firebase_core: ^2.14.0
+  flutterfire_ui: ^0.4.3+20
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  very_good_analysis: ^5.0.0+1
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
