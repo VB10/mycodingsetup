@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mycodingsetup/feature/views/home_view.dart';
 
 import 'package:mycodingsetup/firebase_options.dart';
-import 'package:mycodingsetup/product/utility/snackbars/show_snackbars.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      scaffoldMessengerKey: UtilService.instance.messengerKey,
       theme: ThemeData.dark(),
       home: const HomeView(),
     );
