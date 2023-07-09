@@ -6,6 +6,7 @@ import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
 
 final class HomeViewModel {
   final usersQuery = FirebaseQueries.users.reference;
+
   User? user;
   Future<bool> checkUserGithubLogin() async {
     final response = await _signInWithGitHub();
