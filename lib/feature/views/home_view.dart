@@ -58,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
               );
 
               if (response == null) return;
-              // TODO:
+              // TODO: Navigate to detail page
             },
             icon: const Icon(Icons.search),
           )
