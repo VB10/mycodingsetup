@@ -4,8 +4,8 @@ import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/view_model/home_view_model.dart';
 import 'package:mycodingsetup/feature/views/home_detail_view.dart';
+import 'package:mycodingsetup/product/generation/assets.gen.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
-import 'package:mycodingsetup/product/utility/image_constants.dart';
 import 'package:mycodingsetup/product/utility/locale_keys.dart';
 
 class HomeView extends StatefulWidget {
@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           CircleAvatar(
             backgroundColor: context.general.colorScheme.secondary,
-            child: Image.asset(ImageConstants.icGithub),
+            child: Assets.icGithub.image(),
           )
         ],
       ),
