@@ -10,15 +10,15 @@ import 'package:mycodingsetup/product/generation/assets.gen.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 import 'package:mycodingsetup/product/utility/locale_keys.dart';
 
+part 'mixin/home_view_mixin.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
-  final HomeViewModel _homeViewModel = HomeViewModel();
-
+class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,36 +30,7 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           _GithubLoginButton(homeViewModel: _homeViewModel),
           IconButton(
-            onPressed: () async {
-              final items = await _homeViewModel.usersQuery
-                  .withConverter<BaseFirebaseModel<User>?>(
-                    fromFirestore: (snapshot, options) {
-                      if (snapshot.data()?.isEmpty ?? true) return null;
-                      return BaseFirebaseModel(
-                        id: snapshot.id,
-                        data: User.fromJson(snapshot.data()!),
-                      );
-                    },
-                    toFirestore: (value, options) => throw Exception('-'),
-                  )
-                  .get();
-
-              final userItems = items.docs
-                  .map((e) => e.data()?.data)
-                  .where((element) => element != null)
-                  .cast<User>()
-                  .toList();
-              if (!mounted) return;
-              final response = await showSearch<String?>(
-                context: context,
-                delegate: HomeSearchDelegate(
-                  userItems,
-                ),
-              );
-
-              if (response == null) return;
-              // TODO: Navigate to detail page
-            },
+            onPressed: searchClicked,
             icon: const Icon(Icons.search),
           )
         ],
@@ -114,7 +85,6 @@ class _UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = User.fromJson(mapUser);
-
     if (user.isEmpty) return const SizedBox.shrink();
 
     return Card(
