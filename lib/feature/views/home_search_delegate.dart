@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:mycodingsetup/feature/models/user.dart';
+import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 
 class HomeSearchDelegate extends SearchDelegate<String?> {
   HomeSearchDelegate(this.items);
 
-  final List<User> items;
+  final List<BaseFirebaseModel<User>> items;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -47,17 +48,16 @@ class HomeSearchDelegate extends SearchDelegate<String?> {
     //The Bloc will then handle the searching and add the results to the searchResults stream.
     //This is the equivalent of submitting the search term to whatever search service you are using
     final results = items.where(
-      (element) =>
-          element.name?.toLowerCase().contains(query.toLowerCase()) ?? false,
+      (element) => element.data.name?.toLowerCase().contains(query.toLowerCase()) ?? false,
     );
 
     return ListView.builder(
       itemCount: results.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title: Text(results.elementAt(index).name ?? ''),
+          title: Text(results.elementAt(index).data.name ?? ''),
           onTap: () {
-            close(context, results.elementAt(index).githubUrl ?? '');
+            close(context, results.elementAt(index).id);
           },
         );
       },

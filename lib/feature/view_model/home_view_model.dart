@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mycodingsetup/feature/models/github_profile.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
+import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 
 final class HomeViewModel {
   final usersQuery = FirebaseQueries.users.reference;
@@ -39,5 +40,25 @@ final class HomeViewModel {
       githubUrl: githubProfile.url,
       userName: githubProfile.login,
     );
+  }
+
+  Future<List<BaseFirebaseModel<User>>> getUserList() async {
+    final items = await usersQuery
+        .withConverter<BaseFirebaseModel<User>?>(
+          fromFirestore: (snapshot, options) {
+            if (snapshot.data()?.isEmpty ?? true) return null;
+            return BaseFirebaseModel(
+              id: snapshot.id,
+              data: User.fromJson(snapshot.data()!),
+            );
+          },
+          toFirestore: (value, options) => throw Exception('-'),
+        )
+        .get();
+
+    final userItems =
+        items.docs.map((e) => e.data()).where((element) => element != null).cast<BaseFirebaseModel<User>>().toList();
+
+    return userItems;
   }
 }

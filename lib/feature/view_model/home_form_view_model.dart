@@ -11,8 +11,7 @@ final class HomeFormViewModel {
     final itemExtensionsSpitted = model.extensions.split(',');
     final itemExtensions = itemExtensionsSpitted.map((e) => e.trim()).toList();
     // 1. user data to backend
-    final userResponse =
-        await FirebaseQueries.users.reference.add(user.toJson());
+    final userResponse = await FirebaseQueries.users.reference.add(user.toJson());
 
     // 2. user details to backend
     final userDetail = UserDetail(
@@ -22,9 +21,7 @@ final class HomeFormViewModel {
       settingValue: model.settingValue,
       theme: model.theme,
     );
-    final _ = await FirebaseQueries.userDetail.reference
-        .doc(userResponse.id)
-        .set(userDetail.toJson());
+    final _ = await FirebaseQueries.userDetail.reference.doc(userResponse.id).set(userDetail.toJson());
 
     return true;
   }
