@@ -1,0 +1,13 @@
+{
+    "mainText": {
+        "title": "My Coding Setup"
+    },
+    "authentication": {
+        "welcome": {
+            "title": "Code Setup",
+            "description": "Set up your coding environment effortlessly",
+            "getStarted": "Get Started",
+            "withoutAccount": "Don't have an account? Sign up here"
+        }
+    }
+}

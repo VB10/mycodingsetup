@@ -3,7 +3,7 @@ import 'package:flutter_json_view/flutter_json_view.dart';
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/models/user_detail.dart';
-import 'package:mycodingsetup/feature/views/mixin/home_detail_view_mixin.dart';
+import 'package:mycodingsetup/feature/views/home/mixin/home_detail_view_mixin.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 
 class HomeDetailView extends StatefulWidget {
