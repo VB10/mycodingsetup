@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kartal/kartal.dart';
+import 'package:mycodingsetup/feature/models/user_detail.dart';
 import 'package:mycodingsetup/feature/view_model/home_form_view_model.dart';
 import 'package:mycodingsetup/feature/views/home_form_view.dart';
 
@@ -19,6 +20,13 @@ mixin HomeFormViewMixin on State<HomeFormView> {
   void initState() {
     super.initState();
     _homeFormViewModel = HomeFormViewModel(widget.user);
+    _controlFirstUserDetail();
+  }
+
+  Future<void> _controlFirstUserDetail() async {
+    final userDetail = await _homeFormViewModel.checkUserBasicInformation();
+    if (userDetail == null) return;
+    _updateControllerFromUserDetail(userDetail);
   }
 
   bool _isFormValidate = false;
@@ -31,6 +39,15 @@ mixin HomeFormViewMixin on State<HomeFormView> {
     isButtonEnabledNotifier.value = true;
   }
 
+  void _updateControllerFromUserDetail(UserDetail userDetail) {
+    _computerController.text = userDetail.computer ?? '';
+    _computerUrlController.text = userDetail.computerUrl ?? '';
+    _extensionsController.text = userDetail.extensions?.join(',') ?? '';
+    _settingValueController.text = userDetail.settingValue ?? '';
+    _themeController.text = userDetail.theme ?? '';
+  }
+
+  /// When user filled all data then we are putting data to backend
   Future<void> onSavePressed() async {
     final response = await _homeFormViewModel.saveUserDataToBackend(
       HomeFormModel(
@@ -77,4 +94,11 @@ final class HomeFormModel {
   final String extensions;
   final String settingValue;
   final String theme;
+
+  bool get isEmpty =>
+      computerName.isEmpty ||
+      computerUrl.isEmpty ||
+      extensions.isEmpty ||
+      settingValue.isEmpty ||
+      theme.isEmpty;
 }
