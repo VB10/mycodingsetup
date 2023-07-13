@@ -3,7 +3,7 @@ import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/models/user_detail.dart';
 import 'package:mycodingsetup/feature/view_model/index.dart';
 
-import 'package:mycodingsetup/feature/views/home/home_detail_view.dart';
+import 'package:mycodingsetup/feature/views/main/home/home_detail_view.dart';
 
 mixin HomeDetailViewMixin on State<HomeDetailView> {
   late final HomeDetailViewModel _detailViewModel;

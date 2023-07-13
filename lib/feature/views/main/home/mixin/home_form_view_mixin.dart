@@ -3,7 +3,7 @@ import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/user_detail.dart';
 import 'package:mycodingsetup/feature/view_model/index.dart';
 
-import 'package:mycodingsetup/feature/views/home/home_form_view.dart';
+import 'package:mycodingsetup/feature/views/main/home/home_form_view.dart';
 
 mixin HomeFormViewMixin on State<HomeFormView> {
   final TextEditingController _computerController = TextEditingController();
