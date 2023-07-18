@@ -1,7 +1,8 @@
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/models/user_detail.dart';
-import 'package:mycodingsetup/feature/views/home/mixin/home_form_view_mixin.dart';
 import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
+
+import 'package:mycodingsetup/feature/views/main/home/mixin/home_form_view_mixin.dart';
 
 final class HomeFormViewModel {
   HomeFormViewModel(User user) : _user = user;

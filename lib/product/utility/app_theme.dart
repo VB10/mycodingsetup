@@ -8,10 +8,17 @@ final class AppTheme {
   AppTheme() {
     _themeData = ThemeData.dark();
   }
+
   late final ThemeData _themeData;
 
   ThemeData get currentTheme => _themeData.copyWith(
         scaffoldBackgroundColor: ColorName.cynicalBlack,
+        useMaterial3: true,
+        tabBarTheme: const TabBarTheme(
+          labelColor: ColorName.lust,
+          indicatorColor: ColorName.lust,
+          dividerColor: Colors.transparent,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorName.lust,
@@ -27,12 +34,18 @@ final class AppTheme {
             ),
           ),
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: ColorName.lust,
+          foregroundColor: Colors.white,
+          shape: CircleBorder(),
+        ),
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         colorScheme: const ColorScheme.dark(
           onSecondary: Colors.white,
           onPrimaryContainer: ColorName.potBlack,
+          onBackground: ColorName.direWolf,
         ),
         textTheme: _themeData.textTheme.copyWith(
           headlineLarge: ThemeData.dark().textTheme.headlineLarge?.copyWith(

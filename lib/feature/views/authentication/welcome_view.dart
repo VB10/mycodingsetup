@@ -2,9 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/views/authentication/mixin/welcome_mixin.dart';
-import 'package:mycodingsetup/feature/views/home/index.dart';
 import 'package:mycodingsetup/product/generation/assets.gen.dart';
-import 'package:mycodingsetup/product/utility/navigator_utility.dart';
 import 'package:mycodingsetup/product/utility/translation/locale_keys.g.dart';
 import 'package:mycodingsetup/product/widget/button/white_eleveted_button.dart';
 
@@ -32,8 +30,7 @@ class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () =>
-                    NavigatorUtility(context).pushAndReplace(const HomeView()),
+                onPressed: () => navigateToHome,
                 child: Center(
                   child:
                       Text(LocaleKeys.authentication_welcome_getStarted.tr()),
@@ -42,7 +39,9 @@ class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
               Padding(
                 padding: context.padding.onlyTopNormal,
                 child: WhiteElevatedButton(
-                  onPressed: () => onSignUpPressed(context),
+                  onPressed: () async {
+                    final user = await onSignUpPressed(context);
+                  },
                   title: LocaleKeys.authentication_welcome_withoutAccount.tr(),
                 ),
               ),

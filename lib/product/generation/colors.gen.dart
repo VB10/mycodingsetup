@@ -16,6 +16,9 @@ class ColorName {
   /// Color: #171617
   static const Color cynicalBlack = Color(0xFF171617);
 
+  /// Color: #282828
+  static const Color direWolf = Color(0xFF282828);
+
   /// Color: #EB1F1A
   static const Color lust = Color(0xFFEB1F1A);
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/index.dart';
 
-import 'package:mycodingsetup/feature/views/home/mixin/home_form_view_mixin.dart';
+import 'package:mycodingsetup/feature/views/main/home/mixin/home_form_view_mixin.dart';
 
 class HomeFormView extends StatefulWidget {
   const HomeFormView({required this.user, super.key});
