@@ -1,0 +1,31 @@
+import 'package:core/package/pdf/custom_pdf_controller.dart';
+import 'package:core/package/pdf/pdf_viewer.dart';
+import 'package:core/package/validator/point_validator.dart';
+import 'package:flutter/material.dart';
+
+class DemoView extends StatefulWidget {
+  const DemoView({super.key});
+  @override
+  State<DemoView> createState() => _DemoViewState();
+}
+
+class _DemoViewState extends State<DemoView> {
+  final SyncfusionPdfController _pdfViewerController =
+      SyncfusionPdfController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _pdfViewerController.nextPage,
+      ),
+      body: CustomPDFView(
+        validator: PointValidator(),
+        pdfViewerController: _pdfViewerController,
+        url:
+            'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+      ),
+    );
+  }
+}
