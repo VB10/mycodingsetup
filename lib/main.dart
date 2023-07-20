@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mycodingsetup/demo_view.dart';
+import 'package:mycodingsetup/feature/views/authentication/welcome_view.dart';
 import 'package:mycodingsetup/firebase_options.dart';
 import 'package:mycodingsetup/product/state/user_context.dart';
 import 'package:mycodingsetup/product/utility/app_theme.dart';
@@ -28,7 +28,6 @@ Future<void> main() async {
   runApp(
     TranslationManager(
       child: UserContext(
-        userState: UserState(),
         child: const MyApp(),
       ),
     ),
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: const DemoView(),
+      home: const WelcomeView(),
     );
   }
 }

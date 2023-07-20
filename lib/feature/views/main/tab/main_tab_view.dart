@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:mycodingsetup/feature/sub_feature/user_profile_avatar.dart';
 import 'package:mycodingsetup/feature/views/main/tab/main_tab_view_mixin.dart';
-import 'package:mycodingsetup/product/extension/state_extension.dart';
-import 'package:mycodingsetup/product/state/user_context.dart';
-
 import 'package:mycodingsetup/product/utility/app_constant.dart';
 
 part './widgets/main_tab_widgets.dart';

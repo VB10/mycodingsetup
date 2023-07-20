@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mycodingsetup/feature/sub_feature/github/user_github_manager.dart';
 import 'package:mycodingsetup/feature/view_model/authentication/welcome_view_model.dart';
 import 'package:mycodingsetup/feature/views/authentication/welcome_view.dart';
 import 'package:mycodingsetup/feature/views/main/tab/main_tab_view.dart';
@@ -13,7 +14,7 @@ mixin WelcomeMixin on StatelessWidget, IWelcomeView {
   }
 
   Future<void> onSignUpPressed(BuildContext context) async {
-    final user = await _welcomeViewModel.signUpWithGithub();
+    final user = await UserGithubManager.signUpWithGithub();
     if (user == null) return;
     if (!context.mounted) return;
     _welcomeViewModel.saveUserToStateAndNavigate(user, UserContext.of(context));

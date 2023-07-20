@@ -1,6 +1,6 @@
 import 'package:core/package/pdf/custom_pdf_controller.dart';
 import 'package:core/package/pdf/pdf_viewer.dart';
-import 'package:core/package/validator/point_validator.dart';
+import 'package:core/package/validator/url_validator.dart';
 import 'package:flutter/material.dart';
 
 class DemoView extends StatefulWidget {
@@ -10,8 +10,7 @@ class DemoView extends StatefulWidget {
 }
 
 class _DemoViewState extends State<DemoView> {
-  final SyncfusionPdfController _pdfViewerController =
-      SyncfusionPdfController();
+  final PdfxController _pdfViewerController = PdfxController('assets');
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class _DemoViewState extends State<DemoView> {
         onPressed: _pdfViewerController.nextPage,
       ),
       body: CustomPDFView(
-        validator: PointValidator(),
+        validator: UrlValidator(),
         pdfViewerController: _pdfViewerController,
         url:
             'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
