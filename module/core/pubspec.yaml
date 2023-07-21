@@ -13,7 +13,7 @@ dependencies:
 
     #Utility
   syncfusion_flutter_pdfviewer: ^22.1.39
-  pdfx: ^2.4.0
+  # pdfx: ^2.4.0
 
 dev_dependencies:
   flutter_test:

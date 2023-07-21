@@ -10,7 +10,8 @@ class DemoView extends StatefulWidget {
 }
 
 class _DemoViewState extends State<DemoView> {
-  final PdfxController _pdfViewerController = PdfxController('assets');
+  final SyncfusionPdfController _pdfViewerController =
+      SyncfusionPdfController();
 
   @override
   Widget build(BuildContext context) {
