@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:mycodingsetup/feature/models/github_profile.dart';
-import 'package:mycodingsetup/feature/models/index.dart';
+import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/product/state/user_context.dart';
 
-@immutable
-final class WelcomeViewModel {
-  void saveUserToStateAndNavigate(User user, UserContext userContext) {
-    userContext.updateUserState(user);
-  }
+final class UserGithubManager {
+  const UserGithubManager(this.userContext);
+  final UserContext userContext;
 
-  Future<User?> signUpWithGithub() async {
+  /// Fetch user information data to transform our [User] model
+  static Future<User?> signUpWithGithub() async {
     final instance = auth.FirebaseAuth.instance;
     auth.UserCredential userCredential;
 
@@ -36,5 +35,20 @@ final class WelcomeViewModel {
       userName: githubProfile.login,
       githubId: githubProfile.id,
     );
+  }
+
+  /// Save user information to memory
+  void saveUserInformationToMemory(
+    User? user,
+  ) {
+    if (user == null) return;
+    userContext.updateUserState(user);
+  }
+
+  Future<bool> fetchGithubProfileAndSaveMemory() async {
+    final user = await signUpWithGithub();
+    if (user == null) return false;
+    saveUserInformationToMemory(user);
+    return true;
   }
 }

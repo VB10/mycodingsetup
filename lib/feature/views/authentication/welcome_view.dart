@@ -30,7 +30,7 @@ class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () => navigateToHome,
+                onPressed: () => navigateToHome(context),
                 child: Center(
                   child:
                       Text(LocaleKeys.authentication_welcome_getStarted.tr()),
@@ -40,7 +40,7 @@ class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
                 padding: context.padding.onlyTopNormal,
                 child: WhiteElevatedButton(
                   onPressed: () async {
-                    final user = await onSignUpPressed(context);
+                    await onSignUpPressed(context);
                   },
                   title: LocaleKeys.authentication_welcome_withoutAccount.tr(),
                 ),

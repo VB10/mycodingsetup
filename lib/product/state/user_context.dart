@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 
 final class UserContext extends InheritedWidget {
-  const UserContext({
+  UserContext({
     required super.child,
-    required this.userState,
     super.key,
   });
 
-  final UserState userState;
+  final ValueNotifier<UserState> userState = ValueNotifier(UserState());
+
+  User? get user => userState.value.user;
+
+  void updateUserState(User user) {
+    userState.value = UserState()..setUser(user);
+  }
+
   @override
   bool updateShouldNotify(covariant UserContext oldWidget) {
-    return userState != oldWidget.userState;
+    return true;
   }
 
   static UserContext of(BuildContext context) {
@@ -24,8 +30,8 @@ final class UserContext extends InheritedWidget {
 }
 
 class UserState {
-  late User _user;
-  User get user => _user;
+  User? _user;
+  User? get user => _user;
 
   void setUser(User user) {
     _user = user;
