@@ -9,5 +9,15 @@
             "getStarted": "Get Started",
             "withoutAccount": "Don't have an account? Sign up here"
         }
+    },
+    "general": {
+        "viewAll": "View All"
+    },
+    "home": {
+        "ratingAndReview": "Rating and Review"
+    },
+    "button": {
+        "extension": "Extension",
+        "github": "Github"
     }
 }

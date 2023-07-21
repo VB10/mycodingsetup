@@ -19,6 +19,9 @@ final class AppTheme {
           indicatorColor: ColorName.lust,
           dividerColor: Colors.transparent,
         ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: ColorName.lust,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorName.lust,
@@ -46,6 +49,7 @@ final class AppTheme {
           onSecondary: Colors.white,
           onPrimaryContainer: ColorName.potBlack,
           onBackground: ColorName.direWolf,
+          onError: ColorName.lust,
         ),
         textTheme: _themeData.textTheme.copyWith(
           headlineLarge: ThemeData.dark().textTheme.headlineLarge?.copyWith(

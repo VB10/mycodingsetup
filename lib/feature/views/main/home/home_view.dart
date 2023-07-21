@@ -1,14 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/view_model/home/home_view_model.dart';
 import 'package:mycodingsetup/feature/views/main/home/index.dart';
-import 'package:mycodingsetup/product/generation/assets.gen.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
+import 'package:mycodingsetup/product/utility/translation/locale_keys.g.dart';
+
+import 'package:mycodingsetup/product/widget/button/white_eleveted_button.dart';
+import 'package:mycodingsetup/product/widget/card/rating_review_card.dart';
 
 part 'mixin/home_view_mixin.dart';
+part 'widget/home_github_view.dart';
+part 'widget/home_extension_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -19,74 +23,68 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     context.read<UserContext>().userState.user.name ?? '',
-      //     style: context.general.textTheme.titleMedium,
-      //   ),
-      //   actions: [
-      //     _GithubLoginButton(onPressed: onGithubPressed),
-      //     IconButton(
-      //       onPressed: searchClicked,
-      //       icon: const Icon(Icons.search),
-      //     )
-      //   ],
-      // ),
-      body: FirestoreListView<Map<String, dynamic>>(
-        query: _homeViewModel.usersQuery,
-        itemBuilder: (context, snapshot) {
-          final userMap = snapshot.data();
-          if (userMap.isEmpty) return const SizedBox.shrink();
-
-          return _UserCard(mapUser: userMap, id: snapshot.id);
-        },
-      ),
-    );
-  }
-}
-
-class _GithubLoginButton extends StatelessWidget {
-  // ignore: unused_element
-  const _GithubLoginButton({this.onPressed});
-
-  final VoidCallback? onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: CircleAvatar(
-        backgroundColor: context.general.colorScheme.secondary,
-        child: Assets.icon.icGithub.image(),
-      ),
-    );
-  }
-}
-
-class _UserCard extends StatelessWidget {
-  const _UserCard({required this.mapUser, required this.id});
-  final Map<String, dynamic> mapUser;
-  final String id;
-  @override
-  Widget build(BuildContext context) {
-    final user = User.fromJson(mapUser);
-    if (user.isEmpty) return const SizedBox.shrink();
-
-    return Card(
-      child: ListTile(
-        onTap: () {
-          context.route.navigateToPage(
-            HomeDetailView(
-              user: BaseFirebaseModel<User>(id: id, data: user),
+    return Material(
+      child: ListView(
+        padding: context.padding.horizontalNormal,
+        children: [
+          context.sized.emptySizedHeightBoxLow,
+          _ActionButtons(
+            updateExtensionOrGithub,
+          ),
+          Padding(
+            padding: context.padding.onlyTopNormal,
+            child: ValueListenableBuilder(
+              valueListenable: homeTabListener,
+              builder: (context, value, child) {
+                return AnimatedCrossFade(
+                  duration: context.duration.durationLow,
+                  firstChild: _ListBodyItems(
+                    userListNotifier: userListNotifier,
+                  ),
+                  secondChild: _GithubExtensionView(mapUserFilterListener),
+                  crossFadeState: value == HomeTabItems.github
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                );
+              },
             ),
-          );
-        },
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(user.photo!),
-        ),
-        title: Text(user.name!),
-        subtitle: Text(user.shortBio!),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons(this.onPressed);
+  final ValueSetter<HomeTabItems> onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Spacer(),
+        Expanded(
+          flex: 5,
+          child: ElevatedButton(
+            onPressed: () {
+              onPressed.call(HomeTabItems.extension);
+            },
+            child: const Text(LocaleKeys.button_extension).tr(),
+          ),
+        ),
+        const Spacer(),
+        Expanded(
+          flex: 5,
+          child: WhiteElevatedButton(
+            title: LocaleKeys.button_github.tr(),
+            onPressed: () {
+              onPressed.call(HomeTabItems.github);
+            },
+          ),
+        ),
+        const Spacer(flex: 4),
+      ],
     );
   }
 }

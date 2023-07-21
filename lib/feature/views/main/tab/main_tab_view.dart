@@ -19,13 +19,17 @@ class _MainTabViewState extends State<MainTabView> {
     return DefaultTabController(
       length: MainTabItems.values.length,
       child: Scaffold(
+        extendBody: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.add),
         ),
-        body: const TabBarView(
-          children: MainTabViewMixin.tabBarViews,
+        body: Padding(
+          padding: context.padding.onlyBottomHigh,
+          child: const TabBarView(
+            children: MainTabViewMixin.tabBarViews,
+          ),
         ),
         bottomNavigationBar: const _BottomAppBar(),
         appBar: const _AppBar(),

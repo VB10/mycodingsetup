@@ -6,10 +6,69 @@ import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 
+enum UserFilterQuery {
+  name,
+  shortBio,
+  userName,
+}
+
+extension IterableExtension<T> on Iterable<T?> {
+  List<T> makeSafe() {
+    return where((element) => element != null).cast<T>().toList();
+  }
+}
+
 final class HomeViewModel {
   final usersQuery = FirebaseQueries.users.reference;
 
   User? user;
+  List<BaseFirebaseModel<User>> _userList = [];
+  List<BaseFirebaseModel<User>> get userList => _userList;
+
+  final Map<UserFilterQuery, List<User>> filterQueryMap = {};
+
+  void makeFilter() {
+    final userList = _userList.map((e) => e.data).toList();
+
+    final nameUserList =
+        userList.where((e) => e.name.ext.isNotNullOrNoEmpty).makeSafe();
+
+    final shortBioUserList =
+        userList.where((e) => e.shortBio.ext.isNotNullOrNoEmpty).makeSafe();
+
+    final userNameUserList =
+        userList.where((e) => e.userName.ext.isNotNullOrNoEmpty).makeSafe();
+
+    // entegre todo
+    final nameList = _userList.map((e) => e.data.name).makeSafe();
+    final shortBioList = _userList.map((e) => e.data.shortBio).makeSafe();
+    final userNameList = _userList.map((e) => e.data.userName).makeSafe();
+    filterQueryMap[UserFilterQuery.name] = nameUserList;
+    filterQueryMap[UserFilterQuery.shortBio] = shortBioUserList;
+    filterQueryMap[UserFilterQuery.userName] = userNameUserList;
+  }
+
+  Future<void> fetchAllUserInformation() async {
+    final allUserQueryResponse =
+        await FirebaseQueries.users.reference.withConverter(
+      fromFirestore: (snapshot, options) {
+        if (snapshot.data()?.isEmpty ?? true) return null;
+        return BaseFirebaseModel(
+          id: snapshot.id,
+          data: User.fromJson(snapshot.data()!),
+        );
+      },
+      toFirestore: (value, options) {
+        throw UnimplementedError();
+      },
+    ).get();
+
+    _userList = allUserQueryResponse.docs
+        .map((e) => e.data())
+        .where((element) => element != null)
+        .cast<BaseFirebaseModel<User>>()
+        .toList();
+  }
 
   Future<bool> checkUserGithubLogin() async {
     // //1- check user data from local state
@@ -20,26 +79,6 @@ final class HomeViewModel {
     final response = await _signInWithGitHub();
     user = response;
     return response != null;
-  }
-
-  /// It will control any data has in state
-  /// it it found github domain then it will return user
-  User? _fetchUserProviderData() {
-    final instance = auth.FirebaseAuth.instance;
-
-    final githubUserFromState =
-        instance.currentUser?.providerData.firstWhereOrNull(
-      (element) => element.providerId == 'github.com',
-    );
-
-    if (githubUserFromState != null) {
-      return User(
-        name: githubUserFromState.displayName,
-        photo: githubUserFromState.photoURL,
-        githubId: int.tryParse(githubUserFromState.uid ?? ''),
-      );
-    }
-    return null;
   }
 
   Future<User?> _signInWithGitHub() async {

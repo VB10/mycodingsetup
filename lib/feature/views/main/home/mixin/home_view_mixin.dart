@@ -1,12 +1,35 @@
 part of '../home_view.dart';
 
+enum HomeTabItems { github, extension }
+
 mixin HomeViewMixin on State<HomeView> {
   final HomeViewModel _homeViewModel = HomeViewModel();
+
+  ValueNotifier<List<BaseFirebaseModel<User>>> userListNotifier =
+      ValueNotifier<List<BaseFirebaseModel<User>>>([]);
+
+  ValueNotifier<HomeTabItems> homeTabListener =
+      ValueNotifier<HomeTabItems>(HomeTabItems.extension);
+
+  ValueNotifier<Map<UserFilterQuery, List<User>>> mapUserFilterListener =
+      ValueNotifier<Map<UserFilterQuery, List<User>>>({});
 
   @override
   void initState() {
     super.initState();
-    final user = auth.FirebaseAuth.instance.currentUser;
+    _initialize();
+  }
+
+  void updateExtensionOrGithub(HomeTabItems item) {
+    if (homeTabListener.value == item) return;
+    homeTabListener.value = item;
+  }
+
+  Future<void> _initialize() async {
+    await _homeViewModel.fetchAllUserInformation();
+    _homeViewModel.makeFilter();
+    mapUserFilterListener.value = _homeViewModel.filterQueryMap;
+    userListNotifier.value = _homeViewModel.userList;
   }
 
   Future<void> onGithubPressed() async {
