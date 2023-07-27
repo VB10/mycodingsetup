@@ -1,7 +1,7 @@
 import 'package:core/package/pdf/pdf_view_mixin.dart';
 import 'package:flutter/material.dart';
 
-import 'package:pdfx/pdfx.dart';
+// import 'package:pdfx/pdfx.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../validator/custom_validator.dart';
@@ -28,11 +28,11 @@ class _CustomPDFViewState extends State<CustomPDFView> with CustomPDFViewMixin {
       return const SizedBox.shrink();
     }
 
-    if (pdfController is PdfxController) {
-      return PdfView(
-        controller: pdfXController,
-      );
-    }
+    // if (pdfController is PdfxController) {
+    //   return PdfView(
+    //     controller: pdfXController,
+    //   );
+    // }
 
     if (pdfController is SyncfusionPdfController) {
       return SfPdfViewer.network(

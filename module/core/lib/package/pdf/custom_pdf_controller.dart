@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:pdfx/pdfx.dart';
+// import 'package:pdfx/pdfx.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 abstract class CustomPdfController {
@@ -29,26 +28,26 @@ class SyncfusionPdfController implements CustomPdfController {
 }
 
 class PdfxController implements CustomPdfController {
-  PdfxController(String url) {
-    pdfController = PdfController(
-      document: PdfDocument.openAsset(url),
-    );
-  }
+  // PdfxController(String url) {
+  //   pdfController = PdfController(
+  //     document: PdfDocument.openAsset(url),
+  //   );
+  // }
 
-  late final PdfController pdfController;
+  // late final PdfController pdfController;
 
   @override
   void dispose() {
-    pdfController.dispose();
+    // pdfController.dispose();
   }
 
   @override
   void nextPage() {
-    pdfController.nextPage(duration: Duration.zero, curve: Curves.bounceIn);
+    // pdfController.nextPage(duration: Duration.zero, curve: Curves.bounceIn);
   }
 
   @override
   void previousPage() {
-    pdfController.previousPage(curve: Curves.bounceIn, duration: Duration.zero);
+    // pdfController.previousPage(curve: Curves.bounceIn, duration: Duration.zero);
   }
 }

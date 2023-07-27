@@ -1,14 +1,14 @@
 import 'package:core/package/pdf/pdf_viewer.dart';
 import 'package:flutter/material.dart';
 
-import 'package:pdfx/pdfx.dart';
+// import 'package:pdfx/pdfx.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import 'custom_pdf_controller.dart';
 
 mixin CustomPDFViewMixin on State<CustomPDFView> {
   late final PdfViewerController _pdfViewerController;
-  late final PdfController pdfXController;
+  // late final PdfController pdfXController;
   late final CustomPdfController pdfController;
   PdfViewerController get pdfViewerController => _pdfViewerController;
 
@@ -22,9 +22,9 @@ mixin CustomPDFViewMixin on State<CustomPDFView> {
       _pdfViewerController = controller.pdfViewerController;
     }
 
-    if (controller is PdfxController) {
-      pdfXController = controller.pdfController;
-    }
+    // if (controller is PdfxController) {
+    //   pdfXController = controller.pdfController;
+    // }
 
     pdfController = controller;
     url = widget.url;
