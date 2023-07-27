@@ -1,8 +1,7 @@
 import 'package:mycodingsetup/feature/models/user.dart';
 import 'package:mycodingsetup/feature/models/user_detail.dart';
-import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
-
 import 'package:mycodingsetup/feature/views/main/home/mixin/home_form_view_mixin.dart';
+import 'package:mycodingsetup/product/utility/enums/firestore_queries.dart';
 
 final class HomeFormViewModel {
   HomeFormViewModel(User user) : _user = user;
@@ -14,7 +13,10 @@ final class HomeFormViewModel {
         await FirebaseQueries.userDetail.reference.doc(_getUserId()).get();
 
     if (!userDetailSnapShot.exists) return null;
-    final jsonData = userDetailSnapShot.data();
+    return userDetailFromJson(userDetailSnapShot.data());
+  }
+
+  UserDetail? userDetailFromJson(Map<String, dynamic>? jsonData) {
     if (jsonData == null) return null;
 
     final userDetail = UserDetail.fromJson(jsonData);
