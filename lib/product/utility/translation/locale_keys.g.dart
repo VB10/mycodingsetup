@@ -13,6 +13,11 @@ abstract class  LocaleKeys {
   static const general = 'general';
   static const home_ratingAndReview = 'home.ratingAndReview';
   static const home = 'home';
+  static const homeDetail_selectableTitle_copyAll = 'homeDetail.selectableTitle.copyAll';
+  static const homeDetail_selectableTitle_copyAllShare = 'homeDetail.selectableTitle.copyAllShare';
+  static const homeDetail_selectableTitle_share = 'homeDetail.selectableTitle.share';
+  static const homeDetail_selectableTitle = 'homeDetail.selectableTitle';
+  static const homeDetail = 'homeDetail';
   static const button_extension = 'button.extension';
   static const button_github = 'button.github';
   static const button = 'button';

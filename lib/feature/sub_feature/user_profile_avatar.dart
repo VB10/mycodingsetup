@@ -27,26 +27,5 @@ final class UserProfileAvatar extends StatelessWidget {
         return const SizedBox();
       },
     );
-    return ValueListenableBuilder<UserState>(
-      valueListenable: UserContext.of(context).userState,
-      builder: (context, value, child) {
-        final userPhotoUrl = value.user?.photo;
-
-        if (userPhotoUrl == null || userPhotoUrl.isEmpty) {
-          return InkWell(
-            onTap: () async {
-              await UserGithubManager(context.read<UserContext>())
-                  .fetchGithubProfileAndSaveMemory();
-            },
-            child: CircleAvatar(
-              child: Assets.icon.icGithub.image(),
-            ),
-          );
-        }
-        return CircleAvatar(
-          backgroundImage: NetworkImage(userPhotoUrl),
-        );
-      },
-    );
   }
 }

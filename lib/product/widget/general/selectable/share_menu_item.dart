@@ -1,10 +1,11 @@
 import 'package:kartal/kartal.dart';
+import 'package:mycodingsetup/product/utility/enums/selectable_title_enum.dart';
 import 'package:selectable/selectable.dart';
 
 final class ShareMenuItem extends SelectableMenuItem {
   ShareMenuItem()
       : super(
-          title: 'Share',
+          title: SelectableTitleEnum.share.title,
           isEnabled: (controller) =>
               (controller?.isTextSelected ?? false) &&
               (controller?.getSelection()?.text?.isNotEmpty ?? false),

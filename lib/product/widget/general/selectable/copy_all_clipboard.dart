@@ -1,11 +1,12 @@
 import 'package:kartal/kartal.dart';
 import 'package:mycodingsetup/product/utility/clip_board_mixin.dart';
+import 'package:mycodingsetup/product/utility/enums/selectable_title_enum.dart';
 import 'package:selectable/selectable.dart';
 
 final class CopyAllClipBoardItem extends SelectableMenuItem {
   CopyAllClipBoardItem()
       : super(
-          title: 'Copy all',
+          title: SelectableTitleEnum.copyAll.title,
           isEnabled: (controller) =>
               (controller?.isTextSelected ?? false) &&
               (controller?.getSelection()?.text?.isNotEmpty ?? false),
