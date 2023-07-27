@@ -6,6 +6,8 @@ import 'package:mycodingsetup/feature/models/user_detail.dart';
 import 'package:mycodingsetup/feature/views/main/home/mixin/home_detail_view_mixin.dart';
 import 'package:mycodingsetup/product/utility/firebase/firebase_base_model.dart';
 
+import 'package:mycodingsetup/product/widget/general/selectable_container.dart';
+
 class HomeDetailView extends StatefulWidget {
   const HomeDetailView({required this.user, super.key});
   final BaseFirebaseModel<User> user;
@@ -60,12 +62,14 @@ class _UserDetailCard extends StatelessWidget {
           ),
         ),
         Text('Theme: ${userDetail.theme}'),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: userDetail.extensions?.length ?? 0,
-          itemBuilder: (BuildContext context, int index) {
-            return Text('- ${userDetail.extensions?[index]}');
-          },
+        SelectableContainer(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: userDetail.extensions?.length ?? 0,
+            itemBuilder: (BuildContext context, int index) {
+              return Text('- ${userDetail.extensions?[index]}');
+            },
+          ),
         ),
         if (userDetail.settingValue.ext.isNotNullOrNoEmpty)
           InkWell(
