@@ -12,7 +12,6 @@ final class AppTheme {
   late final ThemeData _themeData;
 
   ThemeData get currentTheme => _themeData.copyWith(
-        scaffoldBackgroundColor: ColorName.cynicalBlack,
         useMaterial3: true,
         tabBarTheme: const TabBarTheme(
           labelColor: ColorName.lust,
