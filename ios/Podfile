@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '11.0'
+ios_deployment_target = '13.0'
+platform :ios, ios_deployment_target
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -31,14 +32,81 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-  target 'RunnerTests' do
-    inherit! :search_paths
+end
+grpc_swift_override_name = 'Custom_Name'
+pre_install do |installer|
+  patrol_pod = installer.pod_targets.find{|target| target.name == 'patrol'}
+  grpc_swift_pod = installer.pod_targets.find{|target| target.name == 'gRPC-Swift'}
+
+  next if patrol_pod.nil? || grpc_swift_pod.nil?
+  grpc_swift_pod.root_spec.module_name = grpc_swift_override_name
+
+  patrol_srcroot_dir = patrol_pod.pod_target_srcroot
+  symlink_patrol_dir = File.dirname(File.expand_path(patrol_srcroot_dir))
+  pub_cache_patrol_dir = File.readlink(symlink_patrol_dir)
+
+  File.unlink(symlink_patrol_dir)
+  FileUtils.cp_r(pub_cache_patrol_dir, symlink_patrol_dir)
+
+  Dir.glob("#{symlink_patrol_dir}/**/*.swift").each do |file_path|
+    content = File.read(file_path).gsub(/(\s)GRPC([\s.])/, "\\1#{grpc_swift_override_name}\\2")
+    File.open(file_path, 'w') {|file| file.write(content)}
   end
 end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = ios_deployment_target
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+
+        ## dart: PermissionGroup.calendar
+        # 'PERMISSION_EVENTS=1',
+
+        ## dart: PermissionGroup.reminders
+        # 'PERMISSION_REMINDERS=1',
+
+        ## dart: PermissionGroup.contacts
+        'PERMISSION_CONTACTS=1',
+
+        ## dart: PermissionGroup.camera
+        'PERMISSION_CAMERA=1',
+
+        ## dart: PermissionGroup.microphone
+        'PERMISSION_MICROPHONE=1',
+
+        ## dart: PermissionGroup.speech
+        # 'PERMISSION_SPEECH_RECOGNIZER=1',
+
+        ## dart: PermissionGroup.photos
+        # 'PERMISSION_PHOTOS=1',
+
+        ## dart: [PermissionGroup.location, PermissionGroup.locationAlways, PermissionGroup.locationWhenInUse]
+        'PERMISSION_LOCATION=1',
+
+        ## dart: PermissionGroup.notification
+        # 'PERMISSION_NOTIFICATIONS=1',
+
+        ## dart: PermissionGroup.mediaLibrary
+        # 'PERMISSION_MEDIA_LIBRARY=1',
+
+        ## dart: PermissionGroup.sensors
+        # 'PERMISSION_SENSORS=1',
+
+        ## dart: PermissionGroup.bluetooth
+        # 'PERMISSION_BLUETOOTH=1',
+
+        ## dart: PermissionGroup.appTrackingTransparency
+        # 'PERMISSION_APP_TRACKING_TRANSPARENCY=1',
+
+        ## dart: PermissionGroup.criticalAlerts
+        # 'PERMISSION_CRITICAL_ALERTS=1'
+      ]
+    end
   end
 end

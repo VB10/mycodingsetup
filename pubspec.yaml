@@ -41,11 +41,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
   very_good_analysis: ^5.0.0+1
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   flutter_gen_runner: ^5.3.1
+  patrol: ^2.2.0
+
+  bdd_widget_test: ^1.6.0
 
 dependency_overrides:
   sign_in_with_apple: ^5.0.0

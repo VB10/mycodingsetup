@@ -7,20 +7,20 @@ part of 'user_detail.dart';
 // **************************************************************************
 
 UserDetail _$UserDetailFromJson(Map<String, dynamic> json) => UserDetail(
-      computer: json['computer'] as String?,
-      computerUrl: json['computerUrl'] as String?,
-      extensions: (json['extensions'] as List<dynamic>?)
+      computer: json['Computer'] as String?,
+      computerUrl: json['ComputerUrl'] as String?,
+      extensions: (json['Extensions'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      theme: json['theme'] as String?,
-      settingValue: json['settingValue'] as String?,
+      theme: json['Theme'] as String?,
+      settingValue: json['SettingValue'] as String?,
     );
 
 Map<String, dynamic> _$UserDetailToJson(UserDetail instance) =>
     <String, dynamic>{
-      'computer': instance.computer,
-      'computerUrl': instance.computerUrl,
-      'extensions': instance.extensions,
-      'theme': instance.theme,
-      'settingValue': instance.settingValue,
+      'Computer': instance.computer,
+      'ComputerUrl': instance.computerUrl,
+      'Extensions': instance.extensions,
+      'Theme': instance.theme,
+      'SettingValue': instance.settingValue,
     };

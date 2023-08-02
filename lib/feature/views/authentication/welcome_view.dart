@@ -6,6 +6,8 @@ import 'package:mycodingsetup/product/generation/assets.gen.dart';
 import 'package:mycodingsetup/product/utility/translation/locale_keys.g.dart';
 import 'package:mycodingsetup/product/widget/button/white_eleveted_button.dart';
 
+import 'package:mycodingsetup/product/constants/page_keys.dart';
+
 mixin class IWelcomeView {}
 
 class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
@@ -30,6 +32,7 @@ class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
               ),
               const Spacer(),
               ElevatedButton(
+                key: PageKeyValues.welcomeWithoutLogin.currentKey,
                 onPressed: () => navigateToHome(context),
                 child: Center(
                   child:

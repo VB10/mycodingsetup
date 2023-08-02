@@ -7,19 +7,19 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      githubUrl: json['githubUrl'] as String?,
-      name: json['name'] as String?,
-      photo: json['photo'] as String?,
-      shortBio: json['shortBio'] as String?,
-      userName: json['userName'] as String?,
-      githubId: json['githubId'] as int?,
+      githubUrl: json['GithubUrl'] as String?,
+      name: json['Name'] as String?,
+      photo: json['Photo'] as String?,
+      shortBio: json['ShortBio'] as String?,
+      userName: json['UserName'] as String?,
+      githubId: json['GithubId'] as int?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'githubUrl': instance.githubUrl,
-      'name': instance.name,
-      'photo': instance.photo,
-      'shortBio': instance.shortBio,
-      'userName': instance.userName,
-      'githubId': instance.githubId,
+      'GithubUrl': instance.githubUrl,
+      'Name': instance.name,
+      'Photo': instance.photo,
+      'ShortBio': instance.shortBio,
+      'UserName': instance.userName,
+      'GithubId': instance.githubId,
     };

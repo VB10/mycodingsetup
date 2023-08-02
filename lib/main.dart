@@ -9,8 +9,8 @@ import 'package:mycodingsetup/product/utility/project_manager.dart';
 import 'package:mycodingsetup/product/utility/translation/translation_manager.dart';
 import 'package:mycodingsetup/product/utility/ui_general/system_style.dart';
 
-final class _AppInitialze {
-  _AppInitialze._();
+final class AppInitialize {
+  AppInitialize._();
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -25,13 +25,9 @@ final class _AppInitialze {
 }
 
 Future<void> main() async {
-  await _AppInitialze.initialize();
+  await AppInitialize.initialize();
   runApp(
-    TranslationManager(
-      child: UserContext(
-        child: const MyApp(),
-      ),
-    ),
+    const MyApp(),
   );
 }
 
@@ -40,13 +36,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme().currentTheme,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      scaffoldMessengerKey: ProjectManager.scaffoldMessengerKey,
-      home: const WelcomeView(),
+    return TranslationManager(
+      child: UserContext(
+        child: Builder(
+          builder: (context) {
+            return MaterialApp(
+              theme: AppTheme().currentTheme,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              scaffoldMessengerKey: ProjectManager.scaffoldMessengerKey,
+              home: const WelcomeView(),
+            );
+          },
+        ),
+      ),
     );
   }
 }

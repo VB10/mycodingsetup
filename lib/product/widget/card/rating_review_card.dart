@@ -13,7 +13,8 @@ class RatingReviewCard extends StatelessWidget {
   final UserFilterQuery query;
   @override
   Widget build(BuildContext context) {
-    final randomUserIndex = Random().nextInt(users.length);
+    final randomUserIndex =
+        Random().nextInt(users.isEmpty ? 5 : users.length + 1);
     final firstUserPhotoUrl =
         users.elementAtOrNull(randomUserIndex)?.photo ?? '';
     return Card(
