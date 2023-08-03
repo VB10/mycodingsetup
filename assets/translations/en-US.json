@@ -16,6 +16,13 @@
     "home": {
         "ratingAndReview": "Rating and Review"
     },
+    "homeDetail": {
+        "selectableTitle": {
+            "copyAll": "Copy All",
+            "copyAllShare": "Copy All & Share",
+            "share": "Share"
+        }
+    },
     "button": {
         "extension": "Extension",
         "github": "Github"
