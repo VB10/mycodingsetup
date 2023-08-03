@@ -7,9 +7,11 @@ final class CopyAllClipBoardItem extends SelectableMenuItem {
   CopyAllClipBoardItem()
       : super(
           title: SelectableTitleEnum.copyAll.title,
-          isEnabled: (controller) =>
-              (controller?.isTextSelected ?? false) &&
-              (controller?.getSelection()?.text?.isNotEmpty ?? false),
+          isEnabled: (controller) {
+            if (controller == null) return false;
+            if (!controller.isTextSelected) return false;
+            return controller.getSelection()?.text?.isNotEmpty ?? false;
+          },
           handler: (controller) {
             if (controller == null) return false;
             controller.selectAll();
