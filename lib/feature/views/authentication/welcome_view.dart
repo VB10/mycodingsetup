@@ -10,6 +10,9 @@ mixin class IWelcomeView {}
 
 class WelcomeView extends StatelessWidget with IWelcomeView, WelcomeMixin {
   const WelcomeView({super.key});
+  //  {
+  //   init();
+  // }
 
   @override
   Widget build(BuildContext context) {
