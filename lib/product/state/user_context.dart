@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mycodingsetup/feature/models/user.dart';
-import 'package:mycodingsetup/product/database/operation/user_hive_model.dart';
+import 'package:mycodingsetup/product/database/operation/user_hive_operation.dart';
 
 final class UserContext extends InheritedWidget {
   UserContext({
