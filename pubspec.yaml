@@ -35,6 +35,12 @@ dependencies:
   flutter_gen: ^5.3.1
   easy_localization: ^3.0.2
 
+  #Database
+  hive_flutter:
+    git:
+      url: https://github.com/hivedb/hive
+      path: hive_flutter
+
   core:
     path: module/core
 
@@ -46,9 +52,14 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   flutter_gen_runner: ^5.3.1
+  hive_generator:
+    git:
+      url: https://github.com/hivedb/hive
+      path: hive_generator
 
 dependency_overrides:
   sign_in_with_apple: ^5.0.0
+  hive: ^3.0.0-dev
 
 flutter:
   uses-material-design: true
