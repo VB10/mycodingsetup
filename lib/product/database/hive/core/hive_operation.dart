@@ -1,9 +1,26 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mycodingsetup/product/database/core/model/hive_model.dart';
+import 'package:mycodingsetup/product/database/core/primitive_database.dart';
+import 'package:mycodingsetup/product/database/hive/core/hive_encryption.dart';
+
+import 'package:mycodingsetup/product/database/hive/core/model/hive_model.dart';
 
 part './model/hive_model_mixin.dart';
 
-class HiveDatabaseOperation<T extends HiveModelMixin> with HiveManagerMixin<T> {
+class HiveDatabaseOperation<T extends HiveModelMixin>
+    extends HiveManagerInitialModel with HiveManagerMixin<T> {
+  HiveDatabaseOperation({required PrimitiveDatabase primitiveDatabase}) {
+    _encryption = HiveEncryption(
+      primitiveDatabase: primitiveDatabase,
+    );
+  }
+
+  Stream<Iterable<T>> streamItems() {
+    return Stream.value(_box.listenable()).map((event) => event.value.values);
+  }
+
+  @override
+  late final HiveEncryption _encryption;
+
   /// The `getItem` function retrieves an item from a box using a given key and returns it, or returns null if the item does
   /// not exist.
   ///

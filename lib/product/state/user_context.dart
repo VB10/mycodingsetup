@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:mycodingsetup/feature/models/user.dart';
-import 'package:mycodingsetup/product/database/operation/user_hive_operation.dart';
+import 'package:mycodingsetup/product/database/hive/operation/user_hive_operation.dart';
+import 'package:mycodingsetup/product/database/secure/secure_database_manager.dart';
 
 final class UserContext extends InheritedWidget {
   UserContext({
@@ -12,7 +13,9 @@ final class UserContext extends InheritedWidget {
   final ValueNotifier<UserState> userState = ValueNotifier(UserState());
 
   User? get user => userState.value.user;
-  final UserHiveOperation _userDatabaseOperation = UserHiveOperation();
+  final UserHiveOperation _userDatabaseOperation = UserHiveOperation(
+    primitiveDatabase: SecureDatabaseManager(),
+  );
 
   // Databasecontext need
   Future<void> initDatabase() async {
