@@ -11,6 +11,7 @@ class HiveEncryption {
 
   Uint8List? _encryptionKeyUint8List;
   final PrimitiveDatabase primitiveDatabase;
+
   Future<Uint8List> getSecureKey() async {
     if (_encryptionKeyUint8List != null) return _encryptionKeyUint8List!;
     // if key not exists return null

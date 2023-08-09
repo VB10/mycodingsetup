@@ -36,5 +36,3 @@ final class HiveDatabaseManager implements IDatabaseManager {
     Hive.registerAdapter(UserAdapter());
   }
 }
-
-class Directory {}
