@@ -14,7 +14,7 @@ class HiveEncryption {
   Future<Uint8List> getSecureKey() async {
     if (_encryptionKeyUint8List != null) return _encryptionKeyUint8List!;
     // if key not exists return null
-    final encryptionKeyString = await primitiveDatabase.read<String?>(
+    final encryptionKeyString = await primitiveDatabase.read<String>(
       PrimitiveKeys.secureDatabaseKey,
     );
     if (encryptionKeyString == null) {

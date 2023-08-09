@@ -17,7 +17,7 @@ final class UserContext extends InheritedWidget {
     primitiveDatabase: SecureDatabaseManager(),
   );
 
-  // Databasecontext need
+  // Database context need
   Future<void> initDatabase() async {
     await _userDatabaseOperation.start();
 
@@ -35,6 +35,9 @@ final class UserContext extends InheritedWidget {
 
   Future<void> _updateUserFromDatabase(User user) async {
     await _userDatabaseOperation.addOrUpdateItem(user);
+    final userr = _userDatabaseOperation.getItem(User.userKey);
+
+    print(userr);
   }
 
   @override
