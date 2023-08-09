@@ -17,6 +17,8 @@ dependencies:
   # Core
   json_annotation: ^4.8.1
   equatable: ^2.0.5
+  path_provider: ^2.0.15
+  path: ^1.8.3
 
   #UI
   flutter_json_view: ^1.1.0
@@ -26,7 +28,6 @@ dependencies:
   cloud_firestore: ^4.8.2
   firebase_core: ^2.14.0
 
-  # flutterfire_ui: ^0.4.3+20
   firebase_auth: ^4.6.3
   firebase_ui_firestore: ^1.5.4
   flutterfire_ui: ^0.4.3+20
@@ -40,6 +41,7 @@ dependencies:
     git:
       url: https://github.com/hivedb/hive
       path: hive_flutter
+  flutter_secure_storage: ^8.0.0
 
   core:
     path: module/core
@@ -48,6 +50,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  mockito: ^5.4.2
   very_good_analysis: ^5.0.0+1
   json_serializable: ^6.7.1
   build_runner: ^2.4.6

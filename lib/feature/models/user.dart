@@ -2,9 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:mycodingsetup/product/database/core/hive_types.dart';
 
-import 'package:mycodingsetup/product/database/core/model/hive_model.dart';
+import 'package:mycodingsetup/product/database/hive/core/hive_types.dart';
+
+import 'package:mycodingsetup/product/database/hive/core/model/hive_model.dart';
 
 part 'user.g.dart';
 
