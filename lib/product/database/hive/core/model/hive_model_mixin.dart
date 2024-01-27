@@ -15,7 +15,10 @@ mixin HiveManagerMixin<T> on HiveManagerInitialModel {
 
   /// The function `start` opens a Hive box of type `T` with the given key asynchronously.
   Future<void> start() async {
-    if (Hive.isBoxOpen(_key)) return;
+    if (Hive.isBoxOpen(_key)) {
+      _box = Hive.box(_key);
+      return;
+    }
     final encryptionKey = await _encryption.getSecureKey();
     _box = await Hive.openBox<T>(
       _key,
